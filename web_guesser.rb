@@ -5,8 +5,8 @@ set :number, rand(100)
 
 get '/' do
   guess = params["guess"].to_i
-  message = check_guess(guess)
-  erb :index, :locals => {:message => message}
+  message, color = check_guess(guess)
+  erb :index, :locals => {:message => message, :color => color}
 end
 
 def check_guess(guess)
@@ -15,22 +15,22 @@ def check_guess(guess)
   elsif guess < settings.number
     too_low(guess)
   elsif guess == settings.number
-    "You got it right!"
+    ["You got it right!", 'green']
   end
 end
 
 def too_high(guess)
   if (guess - 5) > settings.number
-    "Way too high!"
+    ["Way too high!", 'red']
   elsif guess > settings.number
-    "Too high!"
+    ["Too high!", 'pink']
   end
 end
 
 def too_low(guess)
   if (guess + 5) < settings.number
-    "Way too low!"
+    ["Way too low!", 'red']
   elsif guess < settings.number
-    "Too low!"
+    ["Too low!", 'pink']
   end
 end
