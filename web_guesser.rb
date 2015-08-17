@@ -3,9 +3,6 @@ require 'sinatra/reloader'
 
 set :number, rand(100)
 
-def initialize
-  @@guesses = 5
-end
 
 get '/' do
   guess = params["guess"].to_i
